@@ -5,6 +5,8 @@ const tourRouter = require("./routes/tourRouter");
 const userRouter = require("./routes/userRouter");
 const { unknownEndpoint } = require("./middleware/customMiddleware");
 
+const port = process.env.PORT || 4000;
+
 const morgan = require("morgan");
 app.use(morgan("dev"));
 
@@ -25,7 +27,7 @@ app.use("/api/users", userRouter);
 app.use(unknownEndpoint);
 // app.use(errorHandler);
 
-const port = process.env.PORT || 4000;
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
