@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const tourRouter = require("./routes/tourRouter");
 const userRouter = require("./routes/userRouter");
-const { unknownEndpoint } = require("./middleware/customMiddleware");
+const { unknownEndpoint, errorHandler } = require("./middleware/customMiddleware");
 
 const port = process.env.PORT || 4000;
 
@@ -30,8 +30,14 @@ app.use("/api/tours", tourRouter);
 // Use the userRouter for all /users routes
 app.use("/api/users", userRouter);
 
+app.get('/error', (req, res, next) => {
+  const error = new Error("Network problem");
+  next(error);
+});
+
 app.use(unknownEndpoint);
-// app.use(errorHandler);
+
+app.use(errorHandler);
 
 
 // Start the server
