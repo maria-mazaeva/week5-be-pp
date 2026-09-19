@@ -7,6 +7,12 @@ const { unknownEndpoint } = require("./middleware/customMiddleware");
 
 const port = process.env.PORT || 4000;
 
+const connectDB = require("./config/db");
+
+connectDB();
+
+
+
 const morgan = require("morgan");
 app.use(morgan("dev"));
 
